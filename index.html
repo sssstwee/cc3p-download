@@ -167,6 +167,20 @@
         font-size: 0.92em;
       }
 
+      pre {
+        overflow-x: auto;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--surface-2);
+        padding: 12px;
+      }
+
+      pre code {
+        border: 0;
+        background: transparent;
+        padding: 0;
+      }
+
       ol,
       ul {
         padding-left: 22px;
@@ -237,6 +251,38 @@
             </tr>
           </tbody>
         </table>
+      </section>
+
+      <section>
+        <h2>macOS First Launch Authorization / macOS 首次启动授权</h2>
+        <div class="lang">
+          <div>
+            <p>
+              If macOS blocks CC3P because it is not from the App Store or an identified developer, try the safer system flow first:
+              open <strong>System Settings</strong> > <strong>Privacy & Security</strong>, then click <strong>Open Anyway</strong> for CC3P.
+            </p>
+            <p>If you trust this release and need to authorize it from Terminal, run:</p>
+            <pre><code>sudo xattr -rd com.apple.quarantine "/Applications/cc3p.app"
+open "/Applications/cc3p.app"</code></pre>
+            <p>
+              Advanced option: show/enable the <strong>Anywhere</strong> Gatekeeper option, then restore the default setting after CC3P opens normally.
+            </p>
+            <pre><code>sudo spctl --master-disable
+sudo spctl --master-enable</code></pre>
+          </div>
+          <div>
+            <p>
+              如果 macOS 提示 CC3P 不是来自 App Store 或无法验证开发者，优先使用系统方式：
+              打开「系统设置」>「隐私与安全性」，在 CC3P 提示项旁点击「仍要打开」。
+            </p>
+            <p>如果你确认安装包来自本仓库 release，并希望用命令行处理，可以执行：</p>
+            <pre><code>sudo xattr -rd com.apple.quarantine "/Applications/cc3p.app"
+open "/Applications/cc3p.app"</code></pre>
+            <p>高级选项：临时显示/开启 Gatekeeper 的「任何来源」选项。应用可正常打开后，建议恢复默认安全设置：</p>
+            <pre><code>sudo spctl --master-disable
+sudo spctl --master-enable</code></pre>
+          </div>
+        </div>
       </section>
 
       <section class="lang">

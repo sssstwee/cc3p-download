@@ -29,6 +29,24 @@ CC3P helps users manage local configuration for Claude Code, Claude Desktop, and
 | Windows | `.msi` or `.exe` |
 | Linux | `.deb`, `.rpm`, or `.AppImage` |
 
+### macOS First Launch Authorization
+
+If macOS blocks CC3P because it is not from the App Store or an identified developer, try the safer system flow first: open `System Settings` > `Privacy & Security`, then click `Open Anyway` for CC3P.
+
+If you trust this release and need to authorize it from Terminal, run:
+
+```bash
+sudo xattr -rd com.apple.quarantine "/Applications/cc3p.app"
+open "/Applications/cc3p.app"
+```
+
+Advanced option: show/enable the `Anywhere` Gatekeeper option, then restore the default setting after CC3P opens normally.
+
+```bash
+sudo spctl --master-disable
+sudo spctl --master-enable
+```
+
 ### What CC3P Changes
 
 CC3P writes local user config files only:
@@ -56,6 +74,24 @@ CC3P writes local user config files only:
 | macOS Intel | macOS x64 `.dmg` |
 | Windows | `.msi` 或 `.exe` |
 | Linux | `.deb`、`.rpm` 或 `.AppImage` |
+
+### macOS 首次启动授权
+
+如果 macOS 提示 CC3P 不是来自 App Store 或无法验证开发者，优先使用系统方式：打开「系统设置」>「隐私与安全性」，在 CC3P 提示项旁点击「仍要打开」。
+
+如果你确认安装包来自本仓库 release，并希望用命令行处理，可以执行：
+
+```bash
+sudo xattr -rd com.apple.quarantine "/Applications/cc3p.app"
+open "/Applications/cc3p.app"
+```
+
+高级选项：临时显示/开启 Gatekeeper 的「任何来源」选项。应用可正常打开后，建议恢复默认安全设置：
+
+```bash
+sudo spctl --master-disable
+sudo spctl --master-enable
+```
 
 ### CC3P 会修改什么？
 
