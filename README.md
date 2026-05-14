@@ -1,4 +1,6 @@
-# CC3P Downloads
+# Claude & Codex in third-party
+
+中文：Claude & Codex 三方接入
 
 Public downloads and user guide for CC3P.
 
