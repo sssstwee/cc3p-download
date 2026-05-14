@@ -1,9 +1,10 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-lang="zh">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Claude &amp; Codex in third-party | Claude &amp; Codex 三方接入</title>
+    <link rel="icon" href="data:," />
     <style>
       :root {
         color-scheme: light;
@@ -38,6 +39,20 @@
         max-width: 1040px;
         margin: 0 auto;
         padding: 42px 20px 56px;
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+
+      .brand {
+        color: var(--ink-3);
+        font-size: 13px;
+        font-weight: 800;
+        letter-spacing: 0;
       }
 
       .hero {
@@ -93,6 +108,11 @@
         border-color: var(--accent);
         background: var(--accent);
         color: var(--accent-fg);
+      }
+
+      .lang-toggle {
+        min-width: 96px;
+        cursor: pointer;
       }
 
       section {
@@ -191,6 +211,33 @@
         gap: 28px;
       }
 
+      .lang-block,
+      .lang-inline,
+      .lang-row,
+      .lang-list {
+        display: none;
+      }
+
+      html[data-lang="zh"] .lang-block[data-lang="zh"],
+      html[data-lang="en"] .lang-block[data-lang="en"] {
+        display: block;
+      }
+
+      html[data-lang="zh"] .lang-inline[data-lang="zh"],
+      html[data-lang="en"] .lang-inline[data-lang="en"] {
+        display: inline;
+      }
+
+      html[data-lang="zh"] .lang-row[data-lang="zh"],
+      html[data-lang="en"] .lang-row[data-lang="en"] {
+        display: table-row;
+      }
+
+      html[data-lang="zh"] .lang-list[data-lang="zh"],
+      html[data-lang="en"] .lang-list[data-lang="en"] {
+        display: list-item;
+      }
+
       @media (max-width: 640px) {
         .page {
           padding: 26px 14px 42px;
@@ -205,118 +252,135 @@
   </head>
   <body>
     <main class="page">
+      <div class="topbar">
+        <div class="brand">CC3P</div>
+        <button class="btn lang-toggle" id="lang-toggle" type="button">English</button>
+      </div>
+
       <header class="hero">
-        <div class="eyebrow">CC3P Download</div>
-        <h1>Claude & Codex in third-party</h1>
-        <p class="lead zh">Claude & Codex 三方接入</p>
-        <p class="lead">
-          CC3P is a desktop app for managing Claude Code, Claude Desktop, and Codex local configuration across official accounts and third-party model providers.
-        </p>
+        <div class="lang-block" data-lang="zh">
+          <div class="eyebrow">CC3P 下载</div>
+          <h1>Claude & Codex 三方接入</h1>
+          <p class="lead">
+            CC3P 是一个桌面端工具，用于管理 Claude Code、Claude Desktop 和 Codex 的本地配置，支持官方账号模式和第三方模型厂商接入。
+          </p>
+        </div>
+        <div class="lang-block" data-lang="en">
+          <div class="eyebrow">CC3P Download</div>
+          <h1>Claude & Codex in third-party</h1>
+          <p class="lead">
+            CC3P is a desktop app for managing Claude Code, Claude Desktop, and Codex local configuration across official accounts and third-party model providers.
+          </p>
+        </div>
         <div class="actions">
-          <a class="btn primary" href="https://github.com/sssstwee/cc3p-download/releases/latest">Download latest release</a>
-          <a class="btn" href="https://github.com/sssstwee/cc3p-download/releases">All releases</a>
+          <a class="btn primary" href="https://github.com/sssstwee/cc3p-download/releases/latest">
+            <span class="lang-inline" data-lang="zh">下载最新版</span>
+            <span class="lang-inline" data-lang="en">Download latest release</span>
+          </a>
+          <a class="btn" href="https://github.com/sssstwee/cc3p-download/releases">
+            <span class="lang-inline" data-lang="zh">全部版本</span>
+            <span class="lang-inline" data-lang="en">All releases</span>
+          </a>
         </div>
       </header>
 
       <section>
-        <h2>Choose Your Installer / 选择安装包</h2>
+        <h2>
+          <span class="lang-inline" data-lang="zh">选择安装包</span>
+          <span class="lang-inline" data-lang="en">Choose Your Installer</span>
+        </h2>
         <table>
           <thead>
-            <tr>
+            <tr class="lang-row" data-lang="zh">
+              <th>系统</th>
+              <th>安装包</th>
+              <th>说明</th>
+            </tr>
+            <tr class="lang-row" data-lang="en">
               <th>System</th>
               <th>Package</th>
-              <th>说明</th>
+              <th>Notes</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <tr class="lang-row" data-lang="zh">
               <td>macOS Apple Silicon</td>
               <td><code>arm64 .dmg</code></td>
               <td>M1/M2/M3/M4 等 Apple Silicon 机型。</td>
             </tr>
-            <tr>
+            <tr class="lang-row" data-lang="en">
+              <td>macOS Apple Silicon</td>
+              <td><code>arm64 .dmg</code></td>
+              <td>For M1/M2/M3/M4 and later Apple Silicon Macs.</td>
+            </tr>
+            <tr class="lang-row" data-lang="zh">
               <td>macOS Intel</td>
               <td><code>x64 .dmg</code></td>
               <td>Intel 芯片 Mac。</td>
             </tr>
-            <tr>
+            <tr class="lang-row" data-lang="en">
+              <td>macOS Intel</td>
+              <td><code>x64 .dmg</code></td>
+              <td>For Intel Macs.</td>
+            </tr>
+            <tr class="lang-row" data-lang="zh">
               <td>Windows</td>
-              <td><code>.msi</code> or <code>.exe</code></td>
+              <td><code>.msi</code> 或 <code>.exe</code></td>
               <td>Windows 安装包。</td>
             </tr>
-            <tr>
+            <tr class="lang-row" data-lang="en">
+              <td>Windows</td>
+              <td><code>.msi</code> or <code>.exe</code></td>
+              <td>Windows installer packages.</td>
+            </tr>
+            <tr class="lang-row" data-lang="zh">
+              <td>Linux</td>
+              <td><code>.deb</code>、<code>.rpm</code> 或 <code>.AppImage</code></td>
+              <td>根据发行版选择对应格式。</td>
+            </tr>
+            <tr class="lang-row" data-lang="en">
               <td>Linux</td>
               <td><code>.deb</code>, <code>.rpm</code>, or <code>.AppImage</code></td>
-              <td>根据发行版选择对应格式。</td>
+              <td>Choose the package format for your distribution.</td>
             </tr>
           </tbody>
         </table>
       </section>
 
       <section>
-        <h2>macOS First Launch Authorization / macOS 首次启动授权</h2>
-        <div class="lang">
-          <div>
-            <p>
-              If macOS blocks CC3P because it is not from the App Store or an identified developer, try the safer system flow first:
-              open <strong>System Settings</strong> > <strong>Privacy & Security</strong>, then click <strong>Open Anyway</strong> for CC3P.
-            </p>
-            <p>If you trust this release and need to authorize it from Terminal, run:</p>
-            <pre><code>sudo xattr -rd com.apple.quarantine "/Applications/cc3p.app"
+        <div class="lang-block" data-lang="zh">
+          <h2>macOS 首次启动授权</h2>
+          <p>
+            如果 macOS 提示 CC3P 不是来自 App Store 或无法验证开发者，优先使用系统方式：
+            打开「系统设置」>「隐私与安全性」，在 CC3P 提示项旁点击「仍要打开」。
+          </p>
+          <p>如果你确认安装包来自本仓库 release，并希望用命令行处理，可以执行：</p>
+          <pre><code>sudo xattr -rd com.apple.quarantine "/Applications/cc3p.app"
 open "/Applications/cc3p.app"</code></pre>
-            <p>
-              Advanced option: show/enable the <strong>Anywhere</strong> Gatekeeper option, then restore the default setting after CC3P opens normally.
-            </p>
-            <pre><code>sudo spctl --master-disable
+          <p>高级选项：临时显示/开启 Gatekeeper 的「任何来源」选项。应用可正常打开后，建议恢复默认安全设置：</p>
+          <pre><code>sudo spctl --master-disable
 sudo spctl --master-enable</code></pre>
-          </div>
-          <div>
-            <p>
-              如果 macOS 提示 CC3P 不是来自 App Store 或无法验证开发者，优先使用系统方式：
-              打开「系统设置」>「隐私与安全性」，在 CC3P 提示项旁点击「仍要打开」。
-            </p>
-            <p>如果你确认安装包来自本仓库 release，并希望用命令行处理，可以执行：</p>
-            <pre><code>sudo xattr -rd com.apple.quarantine "/Applications/cc3p.app"
+        </div>
+        <div class="lang-block" data-lang="en">
+          <h2>macOS First Launch Authorization</h2>
+          <p>
+            If macOS blocks CC3P because it is not from the App Store or an identified developer, try the safer system flow first:
+            open <strong>System Settings</strong> > <strong>Privacy & Security</strong>, then click <strong>Open Anyway</strong> for CC3P.
+          </p>
+          <p>If you trust this release and need to authorize it from Terminal, run:</p>
+          <pre><code>sudo xattr -rd com.apple.quarantine "/Applications/cc3p.app"
 open "/Applications/cc3p.app"</code></pre>
-            <p>高级选项：临时显示/开启 Gatekeeper 的「任何来源」选项。应用可正常打开后，建议恢复默认安全设置：</p>
-            <pre><code>sudo spctl --master-disable
+          <p>
+            Advanced option: show/enable the <strong>Anywhere</strong> Gatekeeper option, then restore the default setting after CC3P opens normally.
+          </p>
+          <pre><code>sudo spctl --master-disable
 sudo spctl --master-enable</code></pre>
-          </div>
         </div>
       </section>
 
-      <section class="lang">
-        <div>
-          <h2>English User Guide</h2>
-          <h3>Basic workflow</h3>
-          <ol>
-            <li>Install CC3P from the latest public release.</li>
-            <li>Open CC3P and run <strong>Environment Check</strong>.</li>
-            <li>Add or sync a profile for Claude Code, Claude Desktop, or Codex.</li>
-            <li>Review generated config before applying.</li>
-            <li>Click <strong>Apply</strong>.</li>
-            <li>Restart the target app or open a new terminal session if the target reads config only at startup.</li>
-          </ol>
-
-          <h3>What CC3P manages</h3>
-          <div class="grid">
-            <div class="card">
-              <strong>Claude Code</strong>
-              <span class="muted">CLI settings, model mapping, environment variables, feature flags.</span>
-            </div>
-            <div class="card">
-              <strong>Claude Desktop</strong>
-              <span class="muted">Desktop 3P profile library on macOS and Windows.</span>
-            </div>
-            <div class="card">
-              <strong>Codex</strong>
-              <span class="muted">Official auth/config and third-party provider profiles with local compatibility gateway support.</span>
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <h2>中文用户指南</h2>
+      <section>
+        <div class="lang-block" data-lang="zh">
+          <h2>用户指南</h2>
           <h3>基本流程</h3>
           <ol>
             <li>从公开 release 页面安装 CC3P。</li>
@@ -326,7 +390,6 @@ sudo spctl --master-enable</code></pre>
             <li>点击「应用」。</li>
             <li>如果目标应用只在启动时读取配置，请重启目标应用或打开新的终端会话。</li>
           </ol>
-
           <h3>CC3P 管理什么</h3>
           <div class="grid">
             <div class="card">
@@ -343,13 +406,48 @@ sudo spctl --master-enable</code></pre>
             </div>
           </div>
         </div>
+
+        <div class="lang-block" data-lang="en">
+          <h2>User Guide</h2>
+          <h3>Basic workflow</h3>
+          <ol>
+            <li>Install CC3P from the latest public release.</li>
+            <li>Open CC3P and run <strong>Environment Check</strong>.</li>
+            <li>Add or sync a profile for Claude Code, Claude Desktop, or Codex.</li>
+            <li>Review generated config before applying.</li>
+            <li>Click <strong>Apply</strong>.</li>
+            <li>Restart the target app or open a new terminal session if the target reads config only at startup.</li>
+          </ol>
+          <h3>What CC3P manages</h3>
+          <div class="grid">
+            <div class="card">
+              <strong>Claude Code</strong>
+              <span class="muted">CLI settings, model mapping, environment variables, feature flags.</span>
+            </div>
+            <div class="card">
+              <strong>Claude Desktop</strong>
+              <span class="muted">Desktop 3P profile library on macOS and Windows.</span>
+            </div>
+            <div class="card">
+              <strong>Codex</strong>
+              <span class="muted">Official auth/config and third-party provider profiles with local compatibility gateway support.</span>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section>
-        <h2>Local Config Files / 本地配置文件</h2>
+        <h2>
+          <span class="lang-inline" data-lang="zh">本地配置文件</span>
+          <span class="lang-inline" data-lang="en">Local Config Files</span>
+        </h2>
         <table>
           <thead>
-            <tr>
+            <tr class="lang-row" data-lang="zh">
+              <th>目标</th>
+              <th>配置位置</th>
+            </tr>
+            <tr class="lang-row" data-lang="en">
               <th>Target</th>
               <th>Config</th>
             </tr>
@@ -372,14 +470,39 @@ sudo spctl --master-enable</code></pre>
       </section>
 
       <section>
-        <h2>Safety / 安全说明</h2>
+        <h2>
+          <span class="lang-inline" data-lang="zh">安全说明</span>
+          <span class="lang-inline" data-lang="en">Safety</span>
+        </h2>
         <ul>
-          <li>Keep API keys private. 请勿泄露 API Key。</li>
-          <li>Review generated config before applying. 应用前请检查生成配置。</li>
-          <li>Open a new terminal session after applying CLI config. CLI 配置应用后建议新开终端。</li>
-          <li>This repository hosts public downloads and guides only. Source code remains private.</li>
+          <li class="lang-list" data-lang="zh">请勿泄露 API Key。</li>
+          <li class="lang-list" data-lang="zh">应用前请检查生成配置。</li>
+          <li class="lang-list" data-lang="zh">CLI 配置应用后建议新开终端。</li>
+          <li class="lang-list" data-lang="zh">本仓库只提供公开下载和引导，源码仍保持私有。</li>
+          <li class="lang-list" data-lang="en">Keep API keys private.</li>
+          <li class="lang-list" data-lang="en">Review generated config before applying.</li>
+          <li class="lang-list" data-lang="en">Open a new terminal session after applying CLI config.</li>
+          <li class="lang-list" data-lang="en">This repository hosts public downloads and guides only. Source code remains private.</li>
         </ul>
       </section>
     </main>
+    <script>
+      const root = document.documentElement;
+      const toggle = document.getElementById("lang-toggle");
+      const storageKey = "cc3p-guide-lang";
+
+      function setLanguage(lang) {
+        const next = lang === "en" ? "en" : "zh";
+        root.dataset.lang = next;
+        root.lang = next === "en" ? "en" : "zh-CN";
+        toggle.textContent = next === "en" ? "中文" : "English";
+        localStorage.setItem(storageKey, next);
+      }
+
+      setLanguage(localStorage.getItem(storageKey) || "zh");
+      toggle.addEventListener("click", () => {
+        setLanguage(root.dataset.lang === "zh" ? "en" : "zh");
+      });
+    </script>
   </body>
 </html>
