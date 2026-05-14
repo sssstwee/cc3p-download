@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CC3P Download and User Guide</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f6f5f2;
+        --surface: #ffffff;
+        --surface-2: #fbfaf7;
+        --line: #e6e3dc;
+        --ink: #1a1916;
+        --ink-2: #3a3833;
+        --ink-3: #6b6962;
+        --accent: #1a1916;
+        --accent-fg: #ffffff;
+        --ok: #167a46;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font: 15px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .page {
+        max-width: 1040px;
+        margin: 0 auto;
+        padding: 42px 20px 56px;
+      }
+
+      .hero {
+        display: grid;
+        gap: 18px;
+        padding: 36px 0 28px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .eyebrow {
+        color: var(--ink-3);
+        font-size: 13px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(34px, 6vw, 64px);
+        line-height: 1.04;
+        letter-spacing: 0;
+      }
+
+      .lead {
+        max-width: 780px;
+        margin: 0;
+        color: var(--ink-2);
+        font-size: 18px;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .btn {
+        min-height: 40px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 0 16px;
+        background: var(--surface);
+        color: var(--ink);
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      .btn.primary {
+        border-color: var(--accent);
+        background: var(--accent);
+        color: var(--accent-fg);
+      }
+
+      section {
+        padding: 28px 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      h2 {
+        margin: 0 0 12px;
+        font-size: 24px;
+        letter-spacing: 0;
+      }
+
+      h3 {
+        margin: 22px 0 8px;
+        font-size: 17px;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+        gap: 12px;
+      }
+
+      .card {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--surface);
+        padding: 16px;
+      }
+
+      .card strong {
+        display: block;
+        margin-bottom: 6px;
+      }
+
+      .muted {
+        color: var(--ink-3);
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--surface);
+      }
+
+      th,
+      td {
+        border-bottom: 1px solid var(--line);
+        padding: 10px 12px;
+        text-align: left;
+        vertical-align: top;
+      }
+
+      th {
+        background: var(--surface-2);
+      }
+
+      tr:last-child td {
+        border-bottom: 0;
+      }
+
+      code {
+        border: 1px solid var(--line);
+        border-radius: 4px;
+        background: var(--surface-2);
+        padding: 1px 5px;
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 0.92em;
+      }
+
+      ol,
+      ul {
+        padding-left: 22px;
+      }
+
+      .lang {
+        display: grid;
+        gap: 28px;
+      }
+
+      @media (max-width: 640px) {
+        .page {
+          padding: 26px 14px 42px;
+        }
+
+        table {
+          display: block;
+          overflow-x: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <header class="hero">
+        <div class="eyebrow">CC3P Download</div>
+        <h1>Claude & Codex configuration, without exposing the source repository.</h1>
+        <p class="lead">
+          CC3P is a desktop app for managing Claude Code, Claude Desktop, and Codex local configuration across official accounts and third-party model providers.
+        </p>
+        <div class="actions">
+          <a class="btn primary" href="https://github.com/sssstwee/cc3p-download/releases/latest">Download latest release</a>
+          <a class="btn" href="https://github.com/sssstwee/cc3p-download/releases">All releases</a>
+        </div>
+      </header>
+
+      <section>
+        <h2>Choose Your Installer / 选择安装包</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>System</th>
+              <th>Package</th>
+              <th>说明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>macOS Apple Silicon</td>
+              <td><code>arm64 .dmg</code></td>
+              <td>M1/M2/M3/M4 等 Apple Silicon 机型。</td>
+            </tr>
+            <tr>
+              <td>macOS Intel</td>
+              <td><code>x64 .dmg</code></td>
+              <td>Intel 芯片 Mac。</td>
+            </tr>
+            <tr>
+              <td>Windows</td>
+              <td><code>.msi</code> or <code>.exe</code></td>
+              <td>Windows 安装包。</td>
+            </tr>
+            <tr>
+              <td>Linux</td>
+              <td><code>.deb</code>, <code>.rpm</code>, or <code>.AppImage</code></td>
+              <td>根据发行版选择对应格式。</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="lang">
+        <div>
+          <h2>English User Guide</h2>
+          <h3>Basic workflow</h3>
+          <ol>
+            <li>Install CC3P from the latest public release.</li>
+            <li>Open CC3P and run <strong>Environment Check</strong>.</li>
+            <li>Add or sync a profile for Claude Code, Claude Desktop, or Codex.</li>
+            <li>Review generated config before applying.</li>
+            <li>Click <strong>Apply</strong>.</li>
+            <li>Restart the target app or open a new terminal session if the target reads config only at startup.</li>
+          </ol>
+
+          <h3>What CC3P manages</h3>
+          <div class="grid">
+            <div class="card">
+              <strong>Claude Code</strong>
+              <span class="muted">CLI settings, model mapping, environment variables, feature flags.</span>
+            </div>
+            <div class="card">
+              <strong>Claude Desktop</strong>
+              <span class="muted">Desktop 3P profile library on macOS and Windows.</span>
+            </div>
+            <div class="card">
+              <strong>Codex</strong>
+              <span class="muted">Official auth/config and third-party provider profiles with local compatibility gateway support.</span>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h2>中文用户指南</h2>
+          <h3>基本流程</h3>
+          <ol>
+            <li>从公开 release 页面安装 CC3P。</li>
+            <li>打开 CC3P，先运行「环境检查」。</li>
+            <li>为 Claude Code、Claude Desktop 或 Codex 添加/同步配置。</li>
+            <li>应用前检查生成的本地配置内容。</li>
+            <li>点击「应用」。</li>
+            <li>如果目标应用只在启动时读取配置，请重启目标应用或打开新的终端会话。</li>
+          </ol>
+
+          <h3>CC3P 管理什么</h3>
+          <div class="grid">
+            <div class="card">
+              <strong>Claude Code</strong>
+              <span class="muted">CLI settings、模型映射、环境变量、功能开关。</span>
+            </div>
+            <div class="card">
+              <strong>Claude Desktop</strong>
+              <span class="muted">macOS 和 Windows 的桌面端 3P 配置库。</span>
+            </div>
+            <div class="card">
+              <strong>Codex</strong>
+              <span class="muted">官方认证/配置，以及通过本地兼容网关使用第三方模型。</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Local Config Files / 本地配置文件</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Target</th>
+              <th>Config</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Claude Code</td>
+              <td><code>~/.claude/settings.json</code></td>
+            </tr>
+            <tr>
+              <td>Claude Desktop</td>
+              <td>macOS <code>~/Library/Application Support/Claude-3p/configLibrary</code><br />Windows <code>%APPDATA%\Claude-3p\configLibrary</code></td>
+            </tr>
+            <tr>
+              <td>Codex</td>
+              <td><code>~/.codex/auth.json</code>, <code>~/.codex/config.toml</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>Safety / 安全说明</h2>
+        <ul>
+          <li>Keep API keys private. 请勿泄露 API Key。</li>
+          <li>Review generated config before applying. 应用前请检查生成配置。</li>
+          <li>Open a new terminal session after applying CLI config. CLI 配置应用后建议新开终端。</li>
+          <li>This repository hosts public downloads and guides only. Source code remains private.</li>
+        </ul>
+      </section>
+    </main>
+  </body>
+</html>
