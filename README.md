@@ -44,12 +44,6 @@ sudo xattr -rd com.apple.quarantine "/Applications/cc3p.app"
 open "/Applications/cc3p.app"
 ```
 
-After CC3P opens normally, restore the default security setting:
-
-```bash
-sudo spctl --master-enable
-```
-
 ### What CC3P Changes
 
 CC3P writes local user config files only:
@@ -91,12 +85,6 @@ sudo spctl --master-disable
 ```bash
 sudo xattr -rd com.apple.quarantine "/Applications/cc3p.app"
 open "/Applications/cc3p.app"
-```
-
-CC3P 可以正常打开后，建议恢复默认安全设置：
-
-```bash
-sudo spctl --master-enable
 ```
 
 ### CC3P 会修改什么？
