@@ -31,19 +31,22 @@ CC3P helps users manage local configuration for Claude Code, Claude Desktop, and
 
 ### macOS First Launch Authorization
 
-If macOS blocks CC3P because it is not from the App Store or an identified developer, try the safer system flow first: open `System Settings` > `Privacy & Security`, then click `Open Anyway` for CC3P.
+First open `System Settings` > `Privacy & Security` > `Security`, then check whether `Allow applications downloaded from` is already set to `Anywhere`. If `Anywhere` is missing or not enabled, run:
 
-If you trust this release and need to authorize it from Terminal, run:
+```bash
+sudo spctl --master-disable
+```
+
+Then return to `Privacy & Security` and confirm `Anywhere` is available. After that, remove the quarantine flag from CC3P:
 
 ```bash
 sudo xattr -rd com.apple.quarantine "/Applications/cc3p.app"
 open "/Applications/cc3p.app"
 ```
 
-Advanced option: show/enable the `Anywhere` Gatekeeper option, then restore the default setting after CC3P opens normally.
+After CC3P opens normally, restore the default security setting:
 
 ```bash
-sudo spctl --master-disable
 sudo spctl --master-enable
 ```
 
@@ -77,19 +80,22 @@ CC3P writes local user config files only:
 
 ### macOS 首次启动授权
 
-如果 macOS 提示 CC3P 不是来自 App Store 或无法验证开发者，优先使用系统方式：打开「系统设置」>「隐私与安全性」，在 CC3P 提示项旁点击「仍要打开」。
+先打开「系统设置」>「隐私与安全性」>「安全性」，检查「允许以下来源的应用程序」是否已经是「任何来源」。如果没有看到或没有开启「任何来源」，先在终端执行：
 
-如果你确认安装包来自本仓库 release，并希望用命令行处理，可以执行：
+```bash
+sudo spctl --master-disable
+```
+
+然后回到「隐私与安全性」确认「任何来源」已经可用，再移除 CC3P 的隔离标志：
 
 ```bash
 sudo xattr -rd com.apple.quarantine "/Applications/cc3p.app"
 open "/Applications/cc3p.app"
 ```
 
-高级选项：临时显示/开启 Gatekeeper 的「任何来源」选项。应用可正常打开后，建议恢复默认安全设置：
+CC3P 可以正常打开后，建议恢复默认安全设置：
 
 ```bash
-sudo spctl --master-disable
 sudo spctl --master-enable
 ```
 
