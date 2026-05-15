@@ -100,4 +100,4 @@ CC3P 只写入当前用户的本地配置：
 - Keep API keys private.
 - Review generated config before applying.
 - Running terminal sessions may keep old config; open a new session after applying.
-- Source code is not published in this repository. This repository only hosts public downloads and user documentation.
+- After applying app config, quit and reopen the target app.
