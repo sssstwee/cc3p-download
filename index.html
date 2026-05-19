@@ -1,479 +1,54 @@
 <!doctype html>
-<html lang="zh-CN" data-lang="zh">
+<html lang="zh-CN">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Claude &amp; Codex in third-party | Claude &amp; Codex 三方接入</title>
-    <link rel="icon" href="data:," />
+    <meta http-equiv="refresh" content="0; url=https://github.com/sssstwee/cc3p" />
+    <title>CC3P has moved</title>
     <style>
-      :root {
-        color-scheme: light;
-        --bg: #f6f5f2;
-        --surface: #ffffff;
-        --surface-2: #fbfaf7;
-        --line: #e6e3dc;
-        --ink: #1a1916;
-        --ink-2: #3a3833;
-        --ink-3: #6b6962;
-        --accent: #1a1916;
-        --accent-fg: #ffffff;
-        --ok: #167a46;
-      }
-
-      * {
-        box-sizing: border-box;
-      }
-
       body {
         margin: 0;
-        background: var(--bg);
-        color: var(--ink);
-        font: 15px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      }
-
-      a {
-        color: inherit;
-      }
-
-      .page {
-        max-width: 1040px;
-        margin: 0 auto;
-        padding: 42px 20px 56px;
-      }
-
-      .topbar {
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        gap: 16px;
-      }
-
-      .hero {
+        min-height: 100vh;
         display: grid;
-        gap: 18px;
-        padding: 36px 0 28px;
-        border-bottom: 1px solid var(--line);
+        place-items: center;
+        background: #f6f5f2;
+        color: #1a1916;
+        font: 15px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       }
 
-      .eyebrow {
-        color: var(--ink-3);
-        font-size: 13px;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0;
+      main {
+        width: min(640px, calc(100vw - 40px));
+        border: 1px solid #e6e3dc;
+        border-radius: 8px;
+        background: #fff;
+        padding: 24px;
       }
 
       h1 {
-        margin: 0;
-        font-size: clamp(34px, 6vw, 64px);
-        line-height: 1.04;
-        letter-spacing: 0;
-      }
-
-      .lead {
-        max-width: 780px;
-        margin: 0;
-        color: var(--ink-2);
-        font-size: 18px;
-      }
-
-      .actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-      }
-
-      .btn {
-        min-height: 40px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        padding: 0 16px;
-        background: var(--surface);
-        color: var(--ink);
-        font-weight: 700;
-        text-decoration: none;
-      }
-
-      .btn.primary {
-        border-color: var(--accent);
-        background: var(--accent);
-        color: var(--accent-fg);
-      }
-
-      .lang-toggle {
-        min-width: 96px;
-        cursor: pointer;
-      }
-
-      section {
-        padding: 28px 0;
-        border-bottom: 1px solid var(--line);
-      }
-
-      h2 {
-        margin: 0 0 12px;
+        margin: 0 0 10px;
         font-size: 24px;
-        letter-spacing: 0;
       }
 
-      h3 {
-        margin: 22px 0 8px;
-        font-size: 17px;
+      p {
+        margin: 0 0 12px;
+        color: #3a3833;
       }
 
-      .grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-        gap: 12px;
-      }
-
-      .card {
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        background: var(--surface);
-        padding: 16px;
-      }
-
-      .card strong {
-        display: block;
-        margin-bottom: 6px;
-      }
-
-      .muted {
-        color: var(--ink-3);
-      }
-
-      table {
-        width: 100%;
-        border-collapse: collapse;
-        overflow: hidden;
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        background: var(--surface);
-      }
-
-      th,
-      td {
-        border-bottom: 1px solid var(--line);
-        padding: 10px 12px;
-        text-align: left;
-        vertical-align: top;
-      }
-
-      th {
-        background: var(--surface-2);
-      }
-
-      tr:last-child td {
-        border-bottom: 0;
-      }
-
-      code {
-        border: 1px solid var(--line);
-        border-radius: 4px;
-        background: var(--surface-2);
-        padding: 1px 5px;
-        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-        font-size: 0.92em;
-      }
-
-      pre {
-        overflow-x: auto;
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        background: var(--surface-2);
-        padding: 12px;
-      }
-
-      pre code {
-        border: 0;
-        background: transparent;
-        padding: 0;
-      }
-
-      ol,
-      ul {
-        padding-left: 22px;
-      }
-
-      .lang {
-        display: grid;
-        gap: 28px;
-      }
-
-      .lang-block,
-      .lang-inline,
-      .lang-row,
-      .lang-list {
-        display: none;
-      }
-
-      html[data-lang="zh"] .lang-block[data-lang="zh"],
-      html[data-lang="en"] .lang-block[data-lang="en"] {
-        display: block;
-      }
-
-      html[data-lang="zh"] .lang-inline[data-lang="zh"],
-      html[data-lang="en"] .lang-inline[data-lang="en"] {
-        display: inline;
-      }
-
-      html[data-lang="zh"] .lang-row[data-lang="zh"],
-      html[data-lang="en"] .lang-row[data-lang="en"] {
-        display: table-row;
-      }
-
-      html[data-lang="zh"] .lang-list[data-lang="zh"],
-      html[data-lang="en"] .lang-list[data-lang="en"] {
-        display: list-item;
-      }
-
-      @media (max-width: 640px) {
-        .page {
-          padding: 26px 14px 42px;
-        }
-
-        table {
-          display: block;
-          overflow-x: auto;
-        }
+      a {
+        color: #1a1916;
+        font-weight: 700;
       }
     </style>
+    <script>
+      window.location.replace("https://github.com/sssstwee/cc3p");
+    </script>
   </head>
   <body>
-    <main class="page">
-      <div class="topbar">
-        <button class="btn lang-toggle" id="lang-toggle" type="button">English</button>
-      </div>
-
-      <header class="hero">
-        <div class="lang-block" data-lang="zh">
-          <div class="eyebrow">CC3P 下载</div>
-          <h1>Claude & Codex 三方接入</h1>
-          <p class="lead">
-            CC3P 是一个桌面端工具，用于管理 Claude Code、Claude Desktop 和 Codex 的本地配置，支持官方账号模式和第三方模型厂商接入。
-          </p>
-        </div>
-        <div class="lang-block" data-lang="en">
-          <div class="eyebrow">CC3P Download</div>
-          <h1>Claude & Codex in third-party</h1>
-          <p class="lead">
-            CC3P is a desktop app for managing Claude Code, Claude Desktop, and Codex local configuration across official accounts and third-party model providers.
-          </p>
-        </div>
-        <div class="actions">
-          <a class="btn primary" href="https://github.com/sssstwee/cc3p-download/releases/latest">
-            <span class="lang-inline" data-lang="zh">下载最新版</span>
-            <span class="lang-inline" data-lang="en">Download latest release</span>
-          </a>
-          <a class="btn" href="https://github.com/sssstwee/cc3p-download/releases">
-            <span class="lang-inline" data-lang="zh">全部版本</span>
-            <span class="lang-inline" data-lang="en">All releases</span>
-          </a>
-        </div>
-      </header>
-
-      <section>
-        <h2>
-          <span class="lang-inline" data-lang="zh">选择安装包</span>
-          <span class="lang-inline" data-lang="en">Choose Your Installer</span>
-        </h2>
-        <table>
-          <thead>
-            <tr class="lang-row" data-lang="zh">
-              <th>系统</th>
-              <th>安装包</th>
-              <th>说明</th>
-            </tr>
-            <tr class="lang-row" data-lang="en">
-              <th>System</th>
-              <th>Package</th>
-              <th>Notes</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="lang-row" data-lang="zh">
-              <td>macOS Apple Silicon</td>
-              <td><code>arm64 .dmg</code></td>
-              <td>M1/M2/M3/M4 等 Apple Silicon 机型。</td>
-            </tr>
-            <tr class="lang-row" data-lang="en">
-              <td>macOS Apple Silicon</td>
-              <td><code>arm64 .dmg</code></td>
-              <td>For M1/M2/M3/M4 and later Apple Silicon Macs.</td>
-            </tr>
-            <tr class="lang-row" data-lang="zh">
-              <td>macOS Intel</td>
-              <td><code>x64 .dmg</code></td>
-              <td>Intel 芯片 Mac。</td>
-            </tr>
-            <tr class="lang-row" data-lang="en">
-              <td>macOS Intel</td>
-              <td><code>x64 .dmg</code></td>
-              <td>For Intel Macs.</td>
-            </tr>
-            <tr class="lang-row" data-lang="zh">
-              <td>Windows</td>
-              <td><code>.msi</code> 或 <code>.exe</code></td>
-              <td>Windows 安装包。</td>
-            </tr>
-            <tr class="lang-row" data-lang="en">
-              <td>Windows</td>
-              <td><code>.msi</code> or <code>.exe</code></td>
-              <td>Windows installer packages.</td>
-            </tr>
-            <tr class="lang-row" data-lang="zh">
-              <td>Linux</td>
-              <td><code>.deb</code>、<code>.rpm</code> 或 <code>.AppImage</code></td>
-              <td>根据发行版选择对应格式。</td>
-            </tr>
-            <tr class="lang-row" data-lang="en">
-              <td>Linux</td>
-              <td><code>.deb</code>, <code>.rpm</code>, or <code>.AppImage</code></td>
-              <td>Choose the package format for your distribution.</td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
-
-      <section>
-        <div class="lang-block" data-lang="zh">
-          <h2>macOS 首次启动授权</h2>
-          <p>
-            先打开「系统设置」>「隐私与安全性」>「安全性」，检查「允许以下来源的应用程序」是否已经是「任何来源」。
-            如果没有看到或没有开启「任何来源」，先在终端执行：
-          </p>
-          <pre><code>sudo spctl --master-disable</code></pre>
-          <p>然后回到「隐私与安全性」确认「任何来源」已经可用，再移除 CC3P 的隔离标志：</p>
-          <pre><code>sudo xattr -rd com.apple.quarantine "/Applications/cc3p.app"
-open "/Applications/cc3p.app"</code></pre>
-        </div>
-        <div class="lang-block" data-lang="en">
-          <h2>macOS First Launch Authorization</h2>
-          <p>
-            First open <strong>System Settings</strong> > <strong>Privacy & Security</strong> > <strong>Security</strong>, then check whether
-            <strong>Allow applications downloaded from</strong> is already set to <strong>Anywhere</strong>. If <strong>Anywhere</strong> is
-            missing or not enabled, run:
-          </p>
-          <pre><code>sudo spctl --master-disable</code></pre>
-          <p>Then return to <strong>Privacy & Security</strong> and confirm <strong>Anywhere</strong> is available. After that, remove the quarantine flag from CC3P:</p>
-          <pre><code>sudo xattr -rd com.apple.quarantine "/Applications/cc3p.app"
-open "/Applications/cc3p.app"</code></pre>
-        </div>
-      </section>
-
-      <section>
-        <div class="lang-block" data-lang="zh">
-          <h2>用户指南</h2>
-          <h3>基本流程</h3>
-          <ol>
-            <li>从公开 release 页面安装 CC3P。</li>
-            <li>打开 CC3P，先运行「环境检查」。</li>
-            <li>为 Claude Code、Claude Desktop 或 Codex 添加/同步配置。</li>
-            <li>应用前检查生成的本地配置内容。</li>
-            <li>点击「应用」。</li>
-            <li>如果目标应用只在启动时读取配置，请重启目标应用或打开新的终端会话。</li>
-          </ol>
-          <h3>CC3P 管理什么</h3>
-          <div class="grid">
-            <div class="card">
-              <strong>Claude Code</strong>
-              <span class="muted">CLI settings、模型映射、环境变量、功能开关。</span>
-            </div>
-            <div class="card">
-              <strong>Claude Desktop</strong>
-              <span class="muted">macOS 和 Windows 的桌面端 3P 配置库。</span>
-            </div>
-            <div class="card">
-              <strong>Codex</strong>
-              <span class="muted">官方认证/配置，以及通过本地兼容网关使用第三方模型。</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="lang-block" data-lang="en">
-          <h2>User Guide</h2>
-          <h3>Basic workflow</h3>
-          <ol>
-            <li>Install CC3P from the latest public release.</li>
-            <li>Open CC3P and run <strong>Environment Check</strong>.</li>
-            <li>Add or sync a profile for Claude Code, Claude Desktop, or Codex.</li>
-            <li>Review generated config before applying.</li>
-            <li>Click <strong>Apply</strong>.</li>
-            <li>Restart the target app or open a new terminal session if the target reads config only at startup.</li>
-          </ol>
-          <h3>What CC3P manages</h3>
-          <div class="grid">
-            <div class="card">
-              <strong>Claude Code</strong>
-              <span class="muted">CLI settings, model mapping, environment variables, feature flags.</span>
-            </div>
-            <div class="card">
-              <strong>Claude Desktop</strong>
-              <span class="muted">Desktop 3P profile library on macOS and Windows.</span>
-            </div>
-            <div class="card">
-              <strong>Codex</strong>
-              <span class="muted">Official auth/config and third-party provider profiles with local compatibility gateway support.</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section>
-        <h2>
-          <span class="lang-inline" data-lang="zh">本地配置文件</span>
-          <span class="lang-inline" data-lang="en">Local Config Files</span>
-        </h2>
-        <table>
-          <thead>
-            <tr class="lang-row" data-lang="zh">
-              <th>目标</th>
-              <th>配置位置</th>
-            </tr>
-            <tr class="lang-row" data-lang="en">
-              <th>Target</th>
-              <th>Config</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Claude Code</td>
-              <td><code>~/.claude/settings.json</code></td>
-            </tr>
-            <tr>
-              <td>Claude Desktop</td>
-              <td>macOS <code>~/Library/Application Support/Claude-3p/configLibrary</code><br />Windows <code>%APPDATA%\Claude-3p\configLibrary</code></td>
-            </tr>
-            <tr>
-              <td>Codex</td>
-              <td><code>~/.codex/auth.json</code>, <code>~/.codex/config.toml</code></td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
-
+    <main>
+      <h1>CC3P 项目已迁移</h1>
+      <p>CC3P 现在以 <strong>sssstwee/cc3p</strong> 作为主要对外仓库。下载、更新和使用指南都已迁移到新地址。</p>
+      <p>如果页面没有自动跳转，请打开 <a href="https://github.com/sssstwee/cc3p">https://github.com/sssstwee/cc3p</a>。</p>
+      <p>GitHub Pages 新地址：<a href="https://sssstwee.github.io/cc3p/">https://sssstwee.github.io/cc3p/</a></p>
     </main>
-    <script>
-      const root = document.documentElement;
-      const toggle = document.getElementById("lang-toggle");
-      const storageKey = "cc3p-guide-lang";
-
-      function setLanguage(lang) {
-        const next = lang === "en" ? "en" : "zh";
-        root.dataset.lang = next;
-        root.lang = next === "en" ? "en" : "zh-CN";
-        toggle.textContent = next === "en" ? "中文" : "English";
-        localStorage.setItem(storageKey, next);
-      }
-
-      setLanguage(localStorage.getItem(storageKey) || "zh");
-      toggle.addEventListener("click", () => {
-        setLanguage(root.dataset.lang === "zh" ? "en" : "zh");
-      });
-    </script>
   </body>
 </html>
